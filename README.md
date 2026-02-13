@@ -25,7 +25,7 @@ Construido com a API do Claude (Anthropic) usando o padrao **Tool Use** - o agen
 
 ```bash
 # 1. Clone o repositorio
-git clone https://github.com/seu-usuario/qa-agent.git
+git clone https://github.com/Marquezbertin/agente_qaIA
 cd qa-agent
 
 # 2. Crie e ative um ambiente virtual
