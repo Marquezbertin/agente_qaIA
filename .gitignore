@@ -1,0 +1,34 @@
+# Chaves e configuracoes sensiveis
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Dados locais (gerados em runtime)
+data/
+screenshots/
+reports/
+results/
+evidencias/
+generated_tests/
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store

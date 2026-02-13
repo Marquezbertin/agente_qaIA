@@ -1,0 +1,44 @@
+# QA Agent - Dependencias
+# ========================
+
+# IA / LLM
+anthropic>=0.39.0          # API do Claude (Anthropic)
+
+# Interface Web
+streamlit>=1.30.0          # Interface web do agente
+
+# Configuracao
+python-dotenv>=1.0.0       # Carregar variaveis de ambiente do .env
+
+# Web e API
+requests>=2.31.0           # Requisicoes HTTP
+httpx>=0.27.0              # Cliente HTTP async
+
+# Testes
+pytest>=8.0.0              # Framework de testes
+pytest-html>=4.1.0         # Relatorios HTML
+pytest-cov>=4.1.0          # Cobertura de codigo
+pytest-xdist>=3.5.0        # Execucao paralela
+pytest-timeout>=2.2.0      # Timeout por teste
+
+# Browser / E2E (opcional - necessario para testes E2E)
+selenium>=4.18.0           # Automacao de browser
+
+# Parsing e Templates
+beautifulsoup4>=4.12.0     # Parse de HTML
+lxml>=5.1.0                # Parser XML/HTML rapido
+jinja2>=3.1.0              # Templates
+pyyaml>=6.0.0              # Parse de YAML
+
+# Dados
+jsonschema>=4.21.0         # Validacao de JSON Schema
+
+# CLI e Interface
+rich>=13.7.0               # Terminal formatado (cores, tabelas, progress)
+click>=8.1.0               # Framework CLI
+
+# Relatorios
+markdown>=3.5.0            # Conversao Markdown
+
+# Logging
+loguru>=0.7.0              # Logging simplificado
