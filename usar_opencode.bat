@@ -34,4 +34,11 @@ echo Pressione CTRL+C para sair
 echo ============================================
 echo.
 
-opencode
+opencode web
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo [!] OpenCode fechou com erro.
+)
+echo.
+echo Pressione qualquer tecla para sair...
+pause >nul
