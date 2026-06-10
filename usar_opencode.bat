@@ -34,4 +34,4 @@ echo Pressione CTRL+C para sair
 echo ============================================
 echo.
 
-opencode --model free
+opencode
