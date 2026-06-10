@@ -1,160 +1,190 @@
-# QA Agent - Agente de IA para Automacao de Testes
+# QA Agent - Assistente de Testes com IA (Gratuito)
 
-Agente inteligente que atua como **QA Engineer Senior**, capaz de analisar codigo, criar casos de teste, executar testes e gerar relatorios automaticamente.
+Agente de IA que atua como **QA Engineer Senior** - analisa codigo, executa testes, testa APIs, gerencia bugs e gera relatorios.
 
-Construido com a API do Claude (Anthropic) usando o padrao **Tool Use** - o agente tem ferramentas reais para executar acoes no seu projeto.
+**100% gratuito** usando OpenCode com modelos free embutidos.
 
 ## Destaques
 
-- **Execucao real de testes** - Roda pytest, analisa resultados, salva evidencias
-- **Teste de API direto** - Testa endpoints sem escrever codigo
-- **Memoria persistente** - Lembra aprendizados entre sessoes (SQLite)
-- **Anti-alucinacao** - Dados de API sao exibidos diretamente pelo codigo Python, nunca pelo LLM
-- **Gestao de QA completa** - Bugs, features, casos de teste, planos de teste
-- **Browser automation** - Selenium para testes E2E e monitoramento
-- **Interface web** - Streamlit com sidebar interativa
-- **Interface CLI** - Rich terminal para uso via linha de comando
-
-## Requisitos
-
-- Python 3.10+
-- Chave de API da Anthropic ([obtenha aqui](https://console.anthropic.com/))
-- Chrome/Chromium (opcional, para testes E2E com Selenium)
+- **Gratuito** - Usa OpenCode com modelos free (sem chave de API)
+- **Multi-provedor** - Claude, GPT ou Gemini (opcional, se tiver chave)
+- **Executa testes reais** - Roda pytest, testa APIs, gera relatorios
+- **Gestao de QA** - Bugs, features, casos de teste, planos (SQLite)
+- **Memoria persistente** - Aprendizados entre sessoes
+- **Integracao GitHub** - Issues, PRs, branches
+- **Dashboard** - Graficos e metricas (Streamlit)
+- **Relatorios PDF** - Exportacao profissional
+- **OpenCode MCP** - Ferramentas disponiveis no OpenCode
 
 ## Instalacao
 
 ```bash
-# 1. Clone o repositorio
+# 1. Clone
 git clone https://github.com/Marquezbertin/agente_qaIA
-cd qa-agent
+cd agente_qaIA
 
-# 2. Crie e ative um ambiente virtual
+# 2. Ambiente virtual
 python -m venv venv
 venv\Scripts\activate        # Windows
-# source venv/bin/activate   # Linux/Mac
+source venv/bin/activate     # Linux/Mac
 
-# 3. Instale as dependencias
+# 3. Dependencias
 pip install -r requirements.txt
 
-# 4. Configure sua chave de API
-cp .env.example .env
-# Edite o arquivo .env e cole sua chave ANTHROPIC_API_KEY
-
-# 5. Crie o banco de dados de demonstracao
+# 4. Banco de dados demo
 python scripts/create_sample_db.py
+
+# 5. Instale o OpenCode (CLI gratuita)
+winget install -e --id SST.OpenCodeDesktop
 ```
 
-## Como Usar
+## Como Usar (Gratis - Recomendado)
 
-### Interface Web (Recomendado)
+```bash
+# Entre na pasta e execute:
+cd agente_qaIA
+opencode
+
+# OU clique duas vezes em:
+usar_opencode.bat
+```
+
+### Comandos dentro do OpenCode:
+
+| Comando | O que faz |
+|---------|-----------|
+| `Rode os testes de API` | Executa pytest no projeto exemplo |
+| `Teste o endpoint posts` | Testa API JSONPlaceholder |
+| `Crie um bug: erro no login` | Registra bug no banco SQLite |
+| `Liste os bugs abertos` | Mostra bugs registrados |
+| `Gere um relatorio de QA` | Relatorio consolidado |
+| `Busque por SQL injection` | Busca no codigo fonte |
+| `Crie um PR para a branch fix` | Cria Pull Request no GitHub |
+
+### Comandos customizados (via opencode.json):
+
+```
+>test:run tests/api/        # Executa pytest
+>test:api posts             # Testa endpoint
+>test:coverage              # Cobertura de testes
+>qa:bugs                    # Lista bugs
+>qa:report                  # Relatorio QA
+>app:start                  # Streamlit UI
+```
+
+## Como Funciona
+
+```
+OpenCode (Gratis) → MCP Server → QA Agent Tools
+                                     ├── run_pytest
+                                     ├── run_api_test
+                                     ├── create_bug / list_bugs
+                                     ├── create_pull_request
+                                     ├── search_code
+                                     └── generate_qa_report
+```
+
+O OpenCode usa modelos free e o MCP server expoe todas as ferramentas do QA Agent.
+
+## Interfaces Alternativas
+
+### Streamlit (precisa de chave API)
 
 ```bash
 streamlit run app.py
 ```
 
-Acesse `http://localhost:8501` no navegador. A interface inclui:
-- Chat com o agente
-- Seletor de ambiente e modelo
-- Explorador de testes (sidebar)
-- Acoes rapidas (smoke, security, etc.)
-- Monitoramento de browser em tempo real
+Suporte a: **Claude** (ANTHROPIC_API_KEY), **GPT** (OPENAI_API_KEY) ou **Gemini** (GEMINI_API_KEY).
 
-### Interface CLI
+Selecione o provedor na sidebar.
+
+### CLI (precisa de chave API)
 
 ```bash
 python main.py
 ```
 
-Comandos disponiveis no modo interativo:
+## Configuracao
 
-| Comando | Descricao | Exemplo |
-|---------|-----------|---------|
-| `analisar <path>` | Analisa codigo e sugere testes | `analisar tests/api/` |
-| `criar <feature>` | Cria casos de teste | `criar login` |
-| `executar <suite>` | Executa testes | `executar smoke` |
-| `relatorio [periodo]` | Gera relatorio | `relatorio today` |
-| `cobertura` | Analisa cobertura | `cobertura` |
-| `sugerir` | Sugere cenarios | `sugerir` |
-| `help` | Mostra ajuda | `help` |
-| `sair` | Encerra | `sair` |
+Copie `.env.example` para `.env` e configure:
 
-## Exemplos de Uso (Chat)
+```env
+# PARA USAR GRATIS: nao precisa configurar nada!
+# Basta usar: opencode
 
-```
-> Rode os testes de API
-> Teste o endpoint de posts do JSONPlaceholder
-> Crie um teste de seguranca para SQL injection
-> Registre um bug: botao de login nao responde
-> Mostre o historico de testes
-> O que voce aprendeu sobre testes de API?
+# Opcional - provedores pagos:
+# ANTHROPIC_API_KEY=sk-...
+# OPENAI_API_KEY=sk-...
+# GEMINI_API_KEY=...
+
+# Opcional - GitHub:
+# GIT_TOKEN=ghp_...
+# GIT_REPO=seu-usuario/seu-repo
 ```
 
-Veja mais exemplos no arquivo [GUIA_PROMPTS_QA_AGENT.md](GUIA_PROMPTS_QA_AGENT.md).
+Por padrao usa `sample_project/` com APIs publicas (JSONPlaceholder, ReqRes).
+Para usar seu projeto, defina `TEST_PROJECT_DIR` no `.env`.
 
-## Configurando Seu Projeto
-
-Por padrao, o agente usa o `sample_project/` com APIs publicas (JSONPlaceholder, ReqRes).
-
-Para usar com **seu proprio projeto de testes**:
-
-1. Defina a variavel de ambiente `TEST_PROJECT_DIR` no `.env`:
-   ```
-   TEST_PROJECT_DIR=C:\caminho\para\seu\projeto
-   ```
-
-2. O agente vai detectar automaticamente os testes dentro dessa pasta.
-
-3. Se sua API precisa de autenticacao, crie um `.env` dentro do seu projeto com `API_TOKEN` e `API_BASE_URL`.
-
-## Arquitetura
+## Estrutura
 
 ```
-qa-agent/
-├── app.py                   # Interface web (Streamlit)
-├── main.py                  # Interface CLI (Click + Rich)
-├── .env.example             # Template de configuracao
-├── requirements.txt         # Dependencias Python
-├── config/
-│   └── settings.py          # Configuracoes do agente
+agente_qaIA/
+├── app.py                    # Streamlit UI
+├── main.py                   # CLI
+├── opencode_mcp_server.py    # MCP server (integracao OpenCode)
+├── opencode.json             # Config OpenCode
+├── AGENTS.md                 # Instrucoes OpenCode
+├── usar_opencode.bat         # Launcher Windows
 ├── core/
-│   ├── tools.py             # Ferramentas de execucao (Tool Use)
-│   ├── browser.py           # Automacao Selenium
-│   ├── memory.py            # Memoria persistente (SQLite)
-│   ├── qa_tools.py          # Gestao de QA (bugs, features, test cases)
-│   ├── test_data_db.py      # Banco de dados de teste (CPF/CNPJ demo)
-│   ├── agent.py             # Agente principal (CLI)
-│   ├── knowledge_manager.py # Indexacao de repositorios
-│   ├── knowledge_base.py    # RAG com TF-IDF
-│   ├── test_analyzer.py     # Analise de testes existentes
-│   ├── test_generator.py    # Geracao de novos testes
-│   ├── test_executor.py     # Execucao de suites pytest
-│   └── report_generator.py  # Geracao de relatorios
-├── scripts/
-│   └── create_sample_db.py  # Cria banco de dados demo
-├── sample_project/          # Projeto de testes exemplo
-│   ├── tests/
-│   │   ├── api/             # Testes de API (JSONPlaceholder, ReqRes)
-│   │   ├── security/        # Testes de seguranca
-│   │   └── conftest.py      # Fixtures compartilhadas
-│   └── pytest.ini           # Configuracao pytest
-├── data/                    # Banco SQLite de dados de teste
-├── docs/                    # Documentacao adicional
-└── LICENSE                  # MIT
+│   ├── tools.py              # Ferramentas (pytest, API, arquivos)
+│   ├── browser.py            # Selenium
+│   ├── memory.py             # Memoria SQLite
+│   ├── qa_tools.py           # Bugs, features, test cases
+│   ├── providers.py          # Multi-provedores IA
+│   ├── github_tools.py       # GitHub/GitLab
+│   ├── report_pdf.py         # Relatorios PDF
+│   ├── auth.py               # Autenticacao
+│   ├── test_data_db.py       # Dados de teste CPF/CNPJ
+│   ├── agent.py              # Agente CLI
+│   ├── test_analyzer.py      # Analise de testes
+│   ├── test_generator.py     # Geracao de testes
+│   ├── test_executor.py      # Execucao de testes
+│   └── report_generator.py   # Relatorios HTML/MD
+├── sample_project/           # Projeto exemplo
+├── tests/                    # 35 self-tests
+├── scripts/                  # Utilitarios
+├── Dockerfile                # Container
+└── docker-compose.yml        # Orquestracao
 ```
 
-## Como Funciona (Tool Use)
+## Testes
 
-O agente usa o padrao **Tool Use** da API do Claude:
+```bash
+# Testes do projeto exemplo
+python -m pytest sample_project/tests/
 
-1. Usuario envia mensagem
-2. Claude analisa e decide qual ferramenta usar
-3. O codigo Python executa a ferramenta (ex: `run_pytest`, `run_api_test`)
-4. O resultado REAL e devolvido ao Claude
-5. Claude interpreta e responde ao usuario
-6. Dados reais sao exibidos diretamente pelo codigo (nunca pelo LLM)
+# Self-tests do QA Agent
+python -m pytest tests/
+```
 
-Este loop pode repetir ate 10 vezes por mensagem, permitindo que o agente execute fluxos complexos automaticamente.
+## Integracao OpenCode
+
+O QA Agent expoe suas ferramentas via **MCP (Model Context Protocol)**:
+
+```json
+{
+  "mcp": {
+    "qa-agent": {
+      "type": "local",
+      "command": ["python", "opencode_mcp_server.py"],
+      "enabled": true
+    }
+  }
+}
+```
+
+O OpenCode detecta automaticamente o `opencode.json` na raiz do projeto.
 
 ## Licenca
 
-MIT - Veja [LICENSE](LICENSE) para detalhes.
+MIT
