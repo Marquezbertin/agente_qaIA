@@ -3,12 +3,18 @@
 
 # IA / LLM
 anthropic>=0.39.0          # API do Claude (Anthropic)
+openai>=1.0.0              # API do OpenAI GPT
+google-generativeai>=0.8.0 # API do Google Gemini
 
 # Interface Web
 streamlit>=1.30.0          # Interface web do agente
 
+# Graficos e Visualizacao
+plotly>=5.18.0             # Graficos interativos
+
 # Configuracao
 python-dotenv>=1.0.0       # Carregar variaveis de ambiente do .env
+pydantic>=2.0.0            # Validacao de dados
 
 # Web e API
 requests>=2.31.0           # Requisicoes HTTP
@@ -39,6 +45,10 @@ click>=8.1.0               # Framework CLI
 
 # Relatorios
 markdown>=3.5.0            # Conversao Markdown
+weasyprint>=60.0           # Geracao de PDF
 
 # Logging
 loguru>=0.7.0              # Logging simplificado
+
+# PDF e Exportacao
+fpdf2>=2.7.0               # Geracao de PDF simples

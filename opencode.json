@@ -1,0 +1,54 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "name": "QA Agent",
+    "description": "Agente de IA para Automacao de Testes"
+  },
+  "mcp": {
+    "qa-agent": {
+      "type": "local",
+      "command": ["python", "opencode_mcp_server.py"],
+      "enabled": true,
+      "description": "Ferramentas QA Agent: executar testes, testar APIs, gerenciar bugs e reports"
+    }
+  },
+  "customCommands": [
+    {
+      "name": "test:run",
+      "description": "Executa testes pytest",
+      "command": "python -m pytest {test_path} -v --tb=short --no-header",
+      "acceptsInput": true
+    },
+    {
+      "name": "test:api",
+      "description": "Testa um endpoint de API",
+      "command": "python -c \"from core.tools import run_api_test; import json; print(json.dumps(run_api_test(endpoint_name='{endpoint}'), indent=2))\"",
+      "acceptsInput": true
+    },
+    {
+      "name": "test:coverage",
+      "description": "Analisa cobertura de testes",
+      "command": "python -m pytest sample_project/tests/ --cov=sample_project --cov-report=term --no-header"
+    },
+    {
+      "name": "qa:report",
+      "description": "Gera relatorio de QA",
+      "command": "python -c \"from core.qa_tools import generate_test_summary_report; import json; print(json.dumps(generate_test_summary_report(), indent=2))\""
+    },
+    {
+      "name": "qa:bugs",
+      "description": "Lista bugs abertos",
+      "command": "python -c \"from core.qa_tools import list_bugs; import json; print(json.dumps(list_bugs(status='open'), indent=2))\""
+    },
+    {
+      "name": "app:start",
+      "description": "Inicia interface web Streamlit",
+      "command": "streamlit run app.py"
+    },
+    {
+      "name": "app:setup",
+      "description": "Configura o ambiente (cria banco de dados demo)",
+      "command": "python scripts/create_sample_db.py"
+    }
+  ]
+}
