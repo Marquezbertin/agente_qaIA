@@ -1,44 +1,24 @@
 @echo off
 title QA Agent + OpenCode
+set PORT=3000
 
 echo ============================================
 echo  QA Agent + OpenCode - Interface Gratuita
 echo ============================================
 echo.
 
-:: Verificar se opencode existe
 where opencode >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo [!] OpenCode nao encontrado.
-    echo.
-    echo Para instalar, execute:
-    echo    winget install -e --id SST.OpenCodeDesktop
-    echo.
-    echo Ou baixe manualmente de:
-    echo    https://github.com/anomalyco/opencode/releases
-    echo.
+    echo    Para instalar: winget install -e --id SST.OpenCodeDesktop
     pause
     exit /b 1
 )
 
-echo [*] Iniciando OpenCode com integracao QA Agent...
-echo [*] Pasta do projeto: %CD%
+echo Iniciando servidor...
 echo.
-echo Comandos disponiveis no OpenCode:
-echo   "Rode os testes de API"
-echo   "Crie um bug: login quebrado"
-echo   "Mostre o dashboard de QA"
-echo   "Teste o endpoint de posts"
+echo URL: http://localhost:%PORT%
 echo.
-echo Pressione CTRL+C para sair
-echo ============================================
-echo.
-
-opencode web
-if %ERRORLEVEL% NEQ 0 (
-    echo.
-    echo [!] OpenCode fechou com erro.
-)
-echo.
-echo Pressione qualquer tecla para sair...
-pause >nul
+start http://localhost:%PORT%
+opencode web --port %PORT%
+pause
